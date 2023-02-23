@@ -26,9 +26,9 @@ namespace Bazel_GUI
 
         }
 
-        public string folderPath = "";
-        public string projectName = "";
-        public string projectBuildPathM = "";
+        public string workspacePath = string.Empty;
+        public string projectName = string.Empty;
+        public string projectBuildPathM = string.Empty;
 
         private void SelectFolderB_Click(object sender, EventArgs e)
         {
@@ -38,10 +38,10 @@ namespace Bazel_GUI
             DialogResult result = folderDlg.ShowDialog();
             if (result == DialogResult.OK)
             {
-                folderPath = folderDlg.SelectedPath;
+                workspacePath = folderDlg.SelectedPath;
                 Environment.SpecialFolder root = folderDlg.RootFolder;
             }
-            FolderPathT.Text = folderPath;
+            FolderPathT.Text = workspacePath;
         }
 
         private void CreateProjectB_Click(object sender, EventArgs e)
@@ -62,17 +62,17 @@ namespace Bazel_GUI
                 return;
             }
 
-            if (!string.IsNullOrEmpty(folderPath))
+            if (!string.IsNullOrEmpty(workspacePath))
             {
-                string FilePath0 = $"{folderPath}\\.BazelGUI";
-                string FilePath1 = $"{folderPath}\\.bazelversion";
-                string FilePath2 = $"{folderPath}\\WORKSPACE.bazel";
-                string FilePath3 = $"{folderPath}\\{projectName}\\BUILD.bazel";
-                string FilePath4 = $"{folderPath}\\{projectName}\\main.cpp";
+                string FilePath0 = $"{workspacePath}\\.BazelGUI";
+                string FilePath1 = $"{workspacePath}\\.bazelversion";
+                string FilePath2 = $"{workspacePath}\\WORKSPACE.bazel";
+                string FilePath3 = $"{workspacePath}\\projects\\{projectName}\\BUILD.bazel";
+                string FilePath4 = $"{workspacePath}\\projects\\{projectName}\\main.cpp";
 
                 projectBuildPathM = FilePath3;
 
-                System.IO.Directory.CreateDirectory($"{folderPath}\\{projectName}");
+                System.IO.Directory.CreateDirectory($"{workspacePath}\\projects\\{projectName}");
 
                 FileStream BazelGUI = new FileStream(FilePath0, FileMode.Create);
                 FileStream bazelversion = new FileStream(FilePath1, FileMode.Create);
@@ -98,7 +98,7 @@ namespace Bazel_GUI
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = $"/C cd {folderPath} && bazel build //...";
+                startInfo.Arguments = $"/C cd {workspacePath} && bazel build //...";
                 process.StartInfo = startInfo;
                 process.Start();
 
@@ -113,7 +113,8 @@ namespace Bazel_GUI
 
         private void CreateProjForm_Load(object sender, EventArgs e)
         {
-            LanguageListB.Items.Add("c++");
+            LanguageListB.Items.Clear();
+            LanguageListB.Items.Add("c++");      
         }
     }
 }

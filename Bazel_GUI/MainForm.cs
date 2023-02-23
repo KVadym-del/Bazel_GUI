@@ -18,28 +18,33 @@ namespace Bazel_GUI
         private void CreateProjectTB_Click(object sender, EventArgs e)
         {
             CreateProjForm.ShowDialog();
-            WorkspaceSettingsForm.projectPath = CreateProjForm.folderPath;
-            WorkspaceSettingsForm.projectName = CreateProjForm.projectName;
+            WorkspaceSettingsForm.projectPath = CreateProjForm.workspacePath;
             WorkspaceSettingsForm.projectBuildPath.Add(CreateProjForm.projectBuildPathM);
 
-            ProjectLocationT.Text = CreateProjForm.folderPath;
-
-            int ProjectCount = -1;
-
-            foreach (string line in System.IO.File.ReadLines($"{CreateProjForm.folderPath}\\.BazelGUI"))
+            if (!string.IsNullOrEmpty(CreateProjForm.workspacePath))
             {
-                ProjectCount++;
+                foreach (string line in System.IO.File.ReadLines($"{CreateProjForm.workspacePath}\\.BazelGUI"))
+                {
+                    //ProjectCount++;
+                    WorkspaceSettingsForm.projectName.Add(line);
+                }
+            }
+            else
+            {
+                return;
             }
 
-            WorkspaceSettingsForm.projectCount = ProjectCount;
+            ProjectLocationT.Text = CreateProjForm.workspacePath;
+
+            //WorkspaceSettingsForm.projectCount = ProjectCount;
 
             WorkspaceSettingsForm.ShowDialog();
         }
 
         private void OpenProjectTB_Click(object sender, EventArgs e)
         {
-            string WorkspacePath = "";
-            string lineText;
+            string WorkspacePath = String.Empty;
+            string lineText = String.Empty;
 
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Workspace File (*.BazelGUI)|*.BazelGUI";
@@ -47,27 +52,21 @@ namespace Bazel_GUI
             {
                 WorkspacePath = dialog.FileName;
             }
-
-            System.IO.StreamReader file = new System.IO.StreamReader($"{WorkspacePath}");
-            while ((lineText = file.ReadLine()) != null)
+            if (!string.IsNullOrEmpty(WorkspacePath))
             {
-                WorkspaceSettingsForm.projectBuildPath.Add(lineText);
+                //file = new System.IO.StreamReader($"{WorkspacePath}");
+                foreach (string line in System.IO.File.ReadLines($"{WorkspacePath}")) {
+                    WorkspaceSettingsForm.projectName.Add(line);
+                }
             }
-
-            file.Close();
-
-            int ProjectCount = 0;
-
-            foreach (string line in System.IO.File.ReadLines($"{WorkspacePath}"))
+            else
             {
-                ProjectCount++;
+                return;
             }
 
             ProjectLocationT.Text = WorkspacePath;
 
-            //WorkspaceSettingsForm.projectName = "Main"; // Temporary
-
-            WorkspaceSettingsForm.projectCount = ProjectCount;
+            //WorkspaceSettingsForm.projectCount = ProjectCount;
 
             WorkspaceSettingsForm.ShowDialog();
         }

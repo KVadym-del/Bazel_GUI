@@ -33,6 +33,7 @@
             // 
             // projectListFL
             // 
+            projectListFL.AllowDrop = true;
             projectListFL.Location = new Point(12, 60);
             projectListFL.Name = "projectListFL";
             projectListFL.Size = new Size(776, 378);
@@ -46,6 +47,7 @@
             Controls.Add(projectListFL);
             Name = "WorkspaceSettingsForm";
             Text = "WorkspaceSettingsForm";
+            FormClosing += WorkspaceSettingsForm_FormClosing;
             Load += WorkspaceSettingsForm_Load;
             ResumeLayout(false);
         }

@@ -12,12 +12,12 @@ namespace Bazel_GUI
 {
     public partial class BUILDbazel : Form
     {
-        public string BUILDbazelName = "";
-        public string BUILDbazelPath = "";
+        public string BUILDbazelName = String.Empty;
+        public string BUILDbazelPath = String.Empty;
 
         public string BUILDbazelTempName = "BUILDbazel";
 
-        public string contents = "";
+        public string contents = String.Empty;
 
         public BUILDbazel()
         {
