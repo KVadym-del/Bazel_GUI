@@ -1,5 +1,7 @@
-﻿namespace Bazel_GUI {
-    partial class CreateProjForm {
+﻿namespace Bazel_GUI
+{
+    partial class CreateWorksForm
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,15 +26,36 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
+            SelectFolderB = new Button();
+            FolderPathT = new TextBox();
             CreateProjectB = new Button();
             ProjectNameT = new TextBox();
             LanguageListB = new ComboBox();
             SuspendLayout();
             // 
+            // SelectFolderB
+            // 
+            SelectFolderB.Location = new Point(358, 6);
+            SelectFolderB.Name = "SelectFolderB";
+            SelectFolderB.Size = new Size(90, 23);
+            SelectFolderB.TabIndex = 1;
+            SelectFolderB.Text = "Select Folder";
+            SelectFolderB.UseVisualStyleBackColor = true;
+            SelectFolderB.Click += SelectFolderB_Click;
+            // 
+            // FolderPathT
+            // 
+            FolderPathT.Location = new Point(12, 7);
+            FolderPathT.Name = "FolderPathT";
+            FolderPathT.ReadOnly = true;
+            FolderPathT.Size = new Size(340, 23);
+            FolderPathT.TabIndex = 2;
+            // 
             // CreateProjectB
             // 
-            CreateProjectB.Location = new Point(12, 61);
+            CreateProjectB.Location = new Point(12, 65);
             CreateProjectB.Name = "CreateProjectB";
             CreateProjectB.Size = new Size(436, 23);
             CreateProjectB.TabIndex = 3;
@@ -40,7 +65,7 @@
             // 
             // ProjectNameT
             // 
-            ProjectNameT.Location = new Point(12, 12);
+            ProjectNameT.Location = new Point(12, 36);
             ProjectNameT.Name = "ProjectNameT";
             ProjectNameT.Size = new Size(309, 23);
             ProjectNameT.TabIndex = 4;
@@ -50,7 +75,7 @@
             // 
             LanguageListB.DropDownStyle = ComboBoxStyle.DropDownList;
             LanguageListB.FormattingEnabled = true;
-            LanguageListB.Location = new Point(327, 12);
+            LanguageListB.Location = new Point(327, 36);
             LanguageListB.Name = "LanguageListB";
             LanguageListB.Size = new Size(121, 23);
             LanguageListB.TabIndex = 5;
@@ -63,16 +88,20 @@
             Controls.Add(LanguageListB);
             Controls.Add(ProjectNameT);
             Controls.Add(CreateProjectB);
+            Controls.Add(FolderPathT);
+            Controls.Add(SelectFolderB);
             MaximumSize = new Size(476, 135);
             MinimumSize = new Size(476, 135);
-            Name = "CreateProjForm";
-            Text = "CreateProjForm";
+            Name = "CreateWorksForm";
+            Text = "CreateWorksForm";
             Load += CreateProjForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+        private Button SelectFolderB;
+        private TextBox FolderPathT;
         private Button CreateProjectB;
         private TextBox ProjectNameT;
         private ComboBox LanguageListB;

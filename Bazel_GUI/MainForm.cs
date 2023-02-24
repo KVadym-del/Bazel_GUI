@@ -1,74 +1,98 @@
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Reflection;
-using System.Windows.Forms;
+namespace Bazel_GUI {
 
-namespace Bazel_GUI
-{
-    public partial class MainForm : Form
-    {
-        CreateProjForm CreateProjForm = new CreateProjForm();
-        WorkspaceSettingsForm WorkspaceSettingsForm = new WorkspaceSettingsForm();
+    public partial class MainForm : Form {
+        private CreateWorksForm CreateWorksForm = new CreateWorksForm();
+        private WorkspaceSettingsForm WorkspaceSettingsForm = new WorkspaceSettingsForm();
 
-        public MainForm()
-        {
+
+
+        public MainForm() {
             InitializeComponent();
         }
 
-        private void CreateProjectTB_Click(object sender, EventArgs e)
-        {
-            CreateProjForm.ShowDialog();
-            WorkspaceSettingsForm.projectPath = CreateProjForm.workspacePath;
-            WorkspaceSettingsForm.projectBuildPath.Add(CreateProjForm.projectBuildPathM);
+        private void CreateProjectTB_Click(object sender, EventArgs e) {
+            CreateWorksForm.ShowDialog();
+            WorkspaceSettingsForm.projectPath = CreateWorksForm.workspacePath;
 
-            if (!string.IsNullOrEmpty(CreateProjForm.workspacePath))
-            {
-                foreach (string line in System.IO.File.ReadLines($"{CreateProjForm.workspacePath}\\.BazelGUI"))
-                {
-                    //ProjectCount++;
-                    WorkspaceSettingsForm.projectName.Add(line);
+            if (!string.IsNullOrEmpty(CreateWorksForm.workspacePath)) {
+                foreach (string line in System.IO.File.ReadLines($"{CreateWorksForm.workspacePath}\\.BazelGUI")) {
+                    if (line.Contains("\t")) {
+                        WorkspaceSettingsForm.projectName.Add(line.Substring(line.LastIndexOf('\t') + 1));
+                        WorkspaceSettingsForm.projectBuildPath.Add(GetUntilOrEmpty(line));
+                    }
+                    else if (line.Contains(".bazelversion")) {
+                        WorkspaceSettingsForm.projectName.Add(".bazelversion");
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                    }
+                    else if (line.Contains("WORKSPACE.bazel")) {
+                        WorkspaceSettingsForm.projectName.Add("WORKSPACE.bazel");
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                    }
+                    else {
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.projectName.Add(line);
+                    }
                 }
             }
-            else
-            {
+            else {
                 return;
             }
 
-            ProjectLocationT.Text = CreateProjForm.workspacePath;
-
-            //WorkspaceSettingsForm.projectCount = ProjectCount;
+            ProjectLocationT.Text = CreateWorksForm.workspacePath;
 
             WorkspaceSettingsForm.ShowDialog();
         }
 
-        private void OpenProjectTB_Click(object sender, EventArgs e)
-        {
+        private void OpenProjectTB_Click(object sender, EventArgs e) {
             string WorkspacePath = String.Empty;
             string lineText = String.Empty;
 
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Workspace File (*.BazelGUI)|*.BazelGUI";
-            if (DialogResult.OK == dialog.ShowDialog())
-            {
+            if (DialogResult.OK == dialog.ShowDialog()) {
                 WorkspacePath = dialog.FileName;
             }
-            if (!string.IsNullOrEmpty(WorkspacePath))
-            {
-                //file = new System.IO.StreamReader($"{WorkspacePath}");
+            if (!string.IsNullOrEmpty(WorkspacePath)) {
                 foreach (string line in System.IO.File.ReadLines($"{WorkspacePath}")) {
-                    WorkspaceSettingsForm.projectName.Add(line);
+                    if (line.Contains("\t")) {
+                        WorkspaceSettingsForm.projectName.Add(line.Substring(line.LastIndexOf('\t') + 1));
+                        WorkspaceSettingsForm.projectBuildPath.Add(GetUntilOrEmpty(line));
+                    }
+                    else if (line.Contains(".bazelversion")) {
+                        WorkspaceSettingsForm.projectName.Add(".bazelversion");
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                    }
+                    else if (line.Contains("WORKSPACE.bazel")) {
+                        WorkspaceSettingsForm.projectName.Add("WORKSPACE.bazel");
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                    }
+                    else {
+                        WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.projectName.Add(line);
+                    }
                 }
             }
-            else
-            {
+            else {
                 return;
             }
 
+            //WorkspaceSettingsForm.projectPath =
+
             ProjectLocationT.Text = WorkspacePath;
 
-            //WorkspaceSettingsForm.projectCount = ProjectCount;
-
             WorkspaceSettingsForm.ShowDialog();
+        }
+
+        private string GetUntilOrEmpty(string MYtext, string stopAt = "\t") {
+            if (!String.IsNullOrWhiteSpace(MYtext)) {
+                int charLocation = MYtext.IndexOf(stopAt, StringComparison.Ordinal);
+
+                if (charLocation > 0) {
+                    return MYtext.Substring(0, charLocation);
+                }
+            }
+
+            return String.Empty;
         }
     }
 }
