@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateProjForm));
             CreateProjectB = new Button();
             ProjectNameT = new TextBox();
             LanguageListB = new ComboBox();
@@ -63,6 +64,7 @@
             Controls.Add(LanguageListB);
             Controls.Add(ProjectNameT);
             Controls.Add(CreateProjectB);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(476, 135);
             MinimumSize = new Size(476, 135);
             Name = "CreateProjForm";

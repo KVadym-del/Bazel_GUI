@@ -27,7 +27,7 @@
                 MessageBox.Show("Please paste a project name");
                 return;
             }
-            else if (ProjectNameT.Text.All(c => c == ' ')) {
+            else if (workspacePath.Contains("\t") || workspacePath.Contains(" ")) {
                 MessageBox.Show("Please use project name without spaces");
                 return;
             }
@@ -40,7 +40,7 @@
                 return;
             }
 
-            if (workspacePath.All(c => c == ' ')) {
+            if (workspacePath.Contains("\t") || workspacePath.Contains(" ")) {
                 MessageBox.Show("Please use DIR without spaces");
                 return;
             }

@@ -1,7 +1,5 @@
-﻿namespace Bazel_GUI
-{
-    partial class MainForm
-    {
+﻿namespace Bazel_GUI {
+    partial class MainForm {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             CreateProjectTB = new ToolStripMenuItem();
@@ -59,14 +55,14 @@
             // CreateProjectTB
             // 
             CreateProjectTB.Name = "CreateProjectTB";
-            CreateProjectTB.Size = new Size(180, 22);
+            CreateProjectTB.Size = new Size(148, 22);
             CreateProjectTB.Text = "Create Project";
             CreateProjectTB.Click += CreateProjectTB_Click;
             // 
             // OpenProjectTB
             // 
             OpenProjectTB.Name = "OpenProjectTB";
-            OpenProjectTB.Size = new Size(180, 22);
+            OpenProjectTB.Size = new Size(148, 22);
             OpenProjectTB.Text = "Open Project";
             OpenProjectTB.Click += OpenProjectTB_Click;
             // 
@@ -95,10 +91,11 @@
             Controls.Add(ListOfProjectsFL);
             Controls.Add(ProjectLocationT);
             Controls.Add(toolStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
             Name = "MainForm";
-            Text = "Main";
+            Text = "Bazel GUI";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);

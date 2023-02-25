@@ -1,7 +1,5 @@
-﻿namespace Bazel_GUI
-{
-    partial class BUILDbazel
-    {
+﻿namespace Bazel_GUI {
+    partial class BUILDbazel {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BUILDbazel));
             BUILDtextT = new TextBox();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
@@ -68,6 +64,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(toolStrip1);
             Controls.Add(BUILDtextT);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "BUILDbazel";
             Text = "BUILDbazel";
             Load += BUILDbazel_Load;

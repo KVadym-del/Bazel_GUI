@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkspaceSettingsForm));
             projectListFL = new FlowLayoutPanel();
             CreateProjectB = new Button();
             SuspendLayout();
@@ -52,8 +53,9 @@
             ClientSize = new Size(800, 450);
             Controls.Add(CreateProjectB);
             Controls.Add(projectListFL);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WorkspaceSettingsForm";
-            Text = "WorkspaceSettingsForm";
+            Text = "Workspace Settings";
             FormClosing += WorkspaceSettingsForm_FormClosing;
             Load += WorkspaceSettingsForm_Load;
             ResumeLayout(false);

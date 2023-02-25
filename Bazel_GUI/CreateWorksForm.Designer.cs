@@ -1,7 +1,5 @@
-﻿namespace Bazel_GUI
-{
-    partial class CreateWorksForm
-    {
+﻿namespace Bazel_GUI {
+    partial class CreateWorksForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateWorksForm));
             SelectFolderB = new Button();
             FolderPathT = new TextBox();
             CreateProjectB = new Button();
@@ -80,7 +76,7 @@
             LanguageListB.Size = new Size(121, 23);
             LanguageListB.TabIndex = 5;
             // 
-            // CreateProjForm
+            // CreateWorksForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -90,10 +86,11 @@
             Controls.Add(CreateProjectB);
             Controls.Add(FolderPathT);
             Controls.Add(SelectFolderB);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(476, 135);
             MinimumSize = new Size(476, 135);
             Name = "CreateWorksForm";
-            Text = "CreateWorksForm";
+            Text = "Create Workspace";
             Load += CreateProjForm_Load;
             ResumeLayout(false);
             PerformLayout();

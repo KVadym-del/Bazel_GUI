@@ -4,8 +4,6 @@ namespace Bazel_GUI {
         private CreateWorksForm CreateWorksForm = new CreateWorksForm();
         private WorkspaceSettingsForm WorkspaceSettingsForm = new WorkspaceSettingsForm();
 
-
-
         public MainForm() {
             InitializeComponent();
         }
@@ -17,20 +15,24 @@ namespace Bazel_GUI {
             if (!string.IsNullOrEmpty(CreateWorksForm.workspacePath)) {
                 foreach (string line in System.IO.File.ReadLines($"{CreateWorksForm.workspacePath}\\.BazelGUI")) {
                     if (line.Contains("\t")) {
+                        WorkspaceSettingsForm.ifProject.Add(true);
                         WorkspaceSettingsForm.projectName.Add(line.Substring(line.LastIndexOf('\t') + 1));
                         WorkspaceSettingsForm.projectBuildPath.Add(GetUntilOrEmpty(line));
                     }
                     else if (line.Contains(".bazelversion")) {
                         WorkspaceSettingsForm.projectName.Add(".bazelversion");
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                     else if (line.Contains("WORKSPACE.bazel")) {
                         WorkspaceSettingsForm.projectName.Add("WORKSPACE.bazel");
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                     else {
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
                         WorkspaceSettingsForm.projectName.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                 }
             }
@@ -55,20 +57,24 @@ namespace Bazel_GUI {
             if (!string.IsNullOrEmpty(WorkspacePath)) {
                 foreach (string line in System.IO.File.ReadLines($"{WorkspacePath}")) {
                     if (line.Contains("\t")) {
+                        WorkspaceSettingsForm.ifProject.Add(true);
                         WorkspaceSettingsForm.projectName.Add(line.Substring(line.LastIndexOf('\t') + 1));
                         WorkspaceSettingsForm.projectBuildPath.Add(GetUntilOrEmpty(line));
                     }
                     else if (line.Contains(".bazelversion")) {
                         WorkspaceSettingsForm.projectName.Add(".bazelversion");
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                     else if (line.Contains("WORKSPACE.bazel")) {
                         WorkspaceSettingsForm.projectName.Add("WORKSPACE.bazel");
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                     else {
                         WorkspaceSettingsForm.projectBuildPath.Add(line);
                         WorkspaceSettingsForm.projectName.Add(line);
+                        WorkspaceSettingsForm.ifProject.Add(false);
                     }
                 }
             }
